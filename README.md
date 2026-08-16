@@ -4,10 +4,16 @@
 
 ## 安装
 
-要求已安装 DeepSeek Harness，并使用 Web Profile。推荐直接从 GitHub 安装稳定版本：
+要求已安装 DeepSeek Harness，并使用 Web Profile。推荐跟随 GitHub `main` 分支安装；`main` 只放已经确认稳定的版本，后续可以直接执行更新命令：
 
 ```bash
 dsh plugin --profile web add github:baihejiangnan/dsh-session-context-menu
+```
+
+如果希望锁定到当前稳定版本，不自动跟随后续更新，可以安装 Git 标签：
+
+```bash
+dsh plugin --profile web add github:baihejiangnan/dsh-session-context-menu#v0.2.13
 ```
 
 安装后重启 `dsh web` 或承载它的 Tauri、EAC 等应用封装端。开发者也可以克隆仓库后使用本地路径链接：
@@ -18,6 +24,54 @@ dsh plugin --profile web add ./dsh-session-context-menu
 ```
 
 当前稳定版本为 `0.2.13`。
+
+### 更新
+
+通过未锁定的 GitHub 地址安装后，执行下面的命令获取 `main` 上的最新稳定版本：
+
+```bash
+dsh plugin --profile web up @baihejiangnan/dsh-session-context-menu
+```
+
+更新完成后重启 `dsh web` 或应用封装端。使用 `#v0.2.13` 等标签锁定安装的用户，需要先把依赖目标改成新的稳定标签，或重新执行对应新标签的安装命令。
+
+### 卸载
+
+```bash
+dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
+```
+
+## 效果展示
+
+### 会话与工作区
+
+<table>
+  <tr>
+    <td width="34%" align="center"><strong>会话右键菜单</strong></td>
+    <td width="66%" align="center"><strong>工作区右键菜单</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/session-menu.png" alt="会话右键菜单" /></td>
+    <td><img src="docs/images/workspace-menu.png" alt="工作区右键菜单" /></td>
+  </tr>
+</table>
+
+### 对话输入区
+
+<img src="docs/images/conversation-empty-menu.png" alt="空白对话输入区右键菜单" width="100%" />
+
+### 输出内容与侧边编辑器
+
+<table>
+  <tr>
+    <td width="58%" align="center"><strong>输出内容右键菜单</strong></td>
+    <td width="42%" align="center"><strong>侧边编辑器右键菜单</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/conversation-selection-menu.png" alt="输出内容选中文本右键菜单" /></td>
+    <td><img src="docs/images/sidebar-editor-menu.png" alt="侧边编辑器右键菜单" /></td>
+  </tr>
+</table>
 
 ## 内置上下文
 
