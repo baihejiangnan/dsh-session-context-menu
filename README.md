@@ -73,6 +73,10 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
   </tr>
 </table>
 
+### 设置界面
+
+<img src="docs/images/settings-menu.png" alt="设置界面选中文本右键菜单" width="80%" />
+
 ## 内置上下文
 
 - 会话：官方重命名、分叉、归档；打开目录、复制目录和会话 ID。
