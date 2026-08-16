@@ -1,7 +1,7 @@
 {
   "name": "@baihejiangnan/dsh-session-context-menu",
   "version": "0.2.13",
-  "description": "A native-feeling global context menu for DeepSeek Harness sessions, settings, conversation content, links, and editors.",
+  "description": "更好的右键：为 DeepSeek Harness 应用封装端提供原生风格的完整上下文菜单。",
   "keywords": [
     "deepseek-harness",
     "dsh-plugin",

@@ -1,9 +1,11 @@
-# DSH Session Context Menu
+# 更好的右键
+
+> Better Context Menu for DeepSeek Harness
 
 > [!WARNING]
 > **当前版本不适配原生 Web 端。** 本插件只面向承载 DeepSeek Harness Web UI 的应用封装端，包括 Tauri、EAC、Electron、WebView2、CEF、Qt WebEngine 等桌面客户端。直接在 Chrome、Edge、Firefox 等普通浏览器中打开 `dsh web` 不属于当前支持范围，浏览器原生右键行为也不作为本插件的兼容目标。
 
-为 DeepSeek Harness 应用封装端增加鼠标右键菜单，覆盖会话、工作区、设置页、对话正文、链接与输入框。官方已有的会话操作转交官方组件，其余操作使用 Harness 服务、浏览器标准选择范围和 Clipboard API。
+“更好的右键”为 DeepSeek Harness 应用封装端提供更完整、接近原生客户端的鼠标右键体验，覆盖会话、工作区、设置页、对话正文、链接与输入框。官方已有的会话操作转交官方组件，其余操作使用 Harness 服务、浏览器标准选择范围和 Clipboard API。
 
 ## 安装
 
