@@ -1,0 +1,3 @@
+- insert:
+    - id: session-context-menu
+      name: '@baihejiangnan/dsh-session-context-menu'

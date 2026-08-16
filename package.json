@@ -1,0 +1,48 @@
+{
+  "name": "@baihejiangnan/dsh-session-context-menu",
+  "version": "0.2.13",
+  "description": "A native-feeling global context menu for DeepSeek Harness sessions, settings, conversation content, links, and editors.",
+  "keywords": [
+    "deepseek-harness",
+    "dsh-plugin",
+    "context-menu",
+    "tauri",
+    "webview"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baihejiangnan/dsh-session-context-menu.git"
+  },
+  "homepage": "https://github.com/baihejiangnan/dsh-session-context-menu#readme",
+  "bugs": {
+    "url": "https://github.com/baihejiangnan/dsh-session-context-menu/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ]
+    }
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/dsh-client-runtime": ">=0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-workspace": ">=0.1.0-rc.6"
+  },
+  "license": "MIT"
+}
