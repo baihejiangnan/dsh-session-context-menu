@@ -18,7 +18,7 @@ dsh plugin --profile web add github:baihejiangnan/dsh-session-context-menu
 如果希望锁定到当前稳定版本，不自动跟随后续更新，可以安装 Git 标签：
 
 ```bash
-dsh plugin --profile web add github:baihejiangnan/dsh-session-context-menu#v0.2.13
+dsh plugin --profile web add github:baihejiangnan/dsh-session-context-menu#v0.2.14
 ```
 
 安装后重启 `dsh web` 或承载它的 Tauri、EAC 等应用封装端。开发者也可以克隆仓库后使用本地路径链接：
@@ -28,7 +28,7 @@ git clone https://github.com/baihejiangnan/dsh-session-context-menu.git
 dsh plugin --profile web add ./dsh-session-context-menu
 ```
 
-当前稳定版本为 `0.2.13`。
+当前稳定版本为 `0.2.14`。
 
 ### 更新
 
@@ -38,7 +38,7 @@ dsh plugin --profile web add ./dsh-session-context-menu
 dsh plugin --profile web up @baihejiangnan/dsh-session-context-menu
 ```
 
-更新完成后重启 `dsh web` 或应用封装端。使用 `#v0.2.13` 等标签锁定安装的用户，需要先把依赖目标改成新的稳定标签，或重新执行对应新标签的安装命令。
+更新完成后重启 `dsh web` 或应用封装端。使用 `#v0.2.14` 等标签锁定安装的用户，需要先把依赖目标改成新的稳定标签，或重新执行对应新标签的安装命令。
 
 ### 卸载
 
@@ -97,6 +97,23 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
 - 通过会话行的无障碍语义定位目标，通过 `sessions` 和 `workspaces` 公开服务执行业务；无法确认目标时保留浏览器默认菜单。
 - 不复制官方持久化或 RPC 实现，官方仍是会话数据和操作结果的唯一来源。
 - 插件卸载后不留下补丁。
+- **与 dsh-better-sidebar 共存**（v0.2.14+）：better-sidebar 会包装宿主的
+  `workspaces.openPath` 把所有路径导向侧边栏编辑器。为避免目录被当文件打开
+  （`xxx is a directory`），本插件"在资源管理器中打开"直接调用宿主 RPC
+  `host.openPath`（`POST /api/host.openPath`），目录始终交给系统文件管理器；
+  链接类操作仍走 `workspaces.openPath`，保留 better-sidebar 在侧边栏打开链接的行为。
+
+## 更新日志
+
+### v0.2.14（2026-08-18）
+
+- **修复**：与 `dsh-better-sidebar` 共存时，右键菜单"在资源管理器中打开"目录报
+  `xxx is a directory`。目录打开改走宿主 RPC `host.openPath`，绕过 better-sidebar
+  对 `workspaces.openPath` 的包装；链接打开行为不变。
+
+### v0.2.13
+
+- 完整上下文菜单（会话 / 工作区 / 设置页 / 对话正文 / 链接 / 输入框）。
 
 ## GitHub Topics
 

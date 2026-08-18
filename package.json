@@ -1,6 +1,6 @@
 {
   "name": "@baihejiangnan/dsh-session-context-menu",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "更好的右键：为 DeepSeek Harness 应用封装端提供原生风格的完整上下文菜单。",
   "keywords": [
     "deepseek-harness",
