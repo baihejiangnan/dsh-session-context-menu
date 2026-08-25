@@ -2,14 +2,16 @@
 
 > Better Context Menu for DeepSeek Harness
 
+简体中文 | [English](README.en.md)
+
 > [!WARNING]
 > **当前版本不适配原生 Web 端。** 本插件只面向承载 DeepSeek Harness Web UI 的应用封装端，包括 Tauri、EAC、Electron、WebView2、CEF、Qt WebEngine 等桌面客户端。直接在 Chrome、Edge、Firefox 等普通浏览器中打开 `dsh web` 不属于当前支持范围，浏览器原生右键行为也不作为本插件的兼容目标。
 
-“更好的右键”为 DeepSeek Harness 应用封装端提供更完整、接近原生客户端的鼠标右键体验，覆盖会话、工作区、设置页、对话正文、链接与输入框。官方已有的会话操作转交官方组件，其余操作使用 Harness 服务、浏览器标准选择范围和 Clipboard API。
+“更好的右键”为 DeepSeek Harness 应用封装端提供更完整、接近原生客户端的鼠标右键体验，覆盖会话、工作区、设置页、对话正文、链接与输入框。菜单与提示文案支持中英文并自动跟随宿主 UI 语言。官方已有的会话操作转交官方组件；插件额外提供带确认和路径保护的永久删除会话能力。
 
 ## 安装
 
-要求已安装 DeepSeek Harness，并使用 Web Profile。推荐跟随 GitHub `main` 分支安装；`main` 只放已经确认稳定的版本，后续可以直接执行更新命令：
+要求已安装 DeepSeek Harness，并使用承载 Web UI 的 Profile（例如 `web` 或 `tauri`）。推荐跟随 GitHub `main` 分支安装，以获取最新功能并可直接执行更新命令：
 
 ```bash
 dsh plugin --profile web add github:baihejiangnan/dsh-session-context-menu
@@ -28,7 +30,7 @@ git clone https://github.com/baihejiangnan/dsh-session-context-menu.git
 dsh plugin --profile web add ./dsh-session-context-menu
 ```
 
-当前稳定版本为 `0.2.14`。
+当前最新稳定标签为 `v0.2.14`；`main` 已包含将在下一版本发布的中英文适配和永久删除会话功能。
 
 ### 更新
 
@@ -84,7 +86,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
 
 ## 内置上下文
 
-- 会话：官方重命名、分叉、归档；打开目录、复制目录和会话 ID。
+- 会话：官方重命名、分叉、归档；永久删除会话；打开目录、复制目录和会话 ID。
 - 工作区及其“新会话”入口：新建会话、打开目录、重命名、复制路径、归档会话和安全移除工作区。
 - 普通文本：复制所选文本；全选严格限定在当前对话内容 slot 或设置弹窗，不包含应用侧边栏。
 - 链接或选中的网址：使用系统默认浏览器打开、复制链接。
@@ -95,7 +97,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
 
 - 不修改 `@deepseek-ai/*`、Tauri 壳或其他社区插件。
 - 通过会话行的无障碍语义定位目标，通过 `sessions` 和 `workspaces` 公开服务执行业务；无法确认目标时保留浏览器默认菜单。
-- 不复制官方持久化或 RPC 实现，官方仍是会话数据和操作结果的唯一来源。
+- 常规操作继续使用 Harness 公开服务；永久删除通过插件宿主路由处理，因为 Harness 当前仅公开归档而没有删除会话 RPC。
 - 插件卸载后不留下补丁。
 - **与 dsh-better-sidebar 共存**（v0.2.14+）：better-sidebar 会包装宿主的
   `workspaces.openPath` 把所有路径导向侧边栏编辑器。为避免目录被当文件打开
@@ -103,7 +105,25 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
   `host.openPath`（`POST /api/host.openPath`），目录始终交给系统文件管理器；
   链接类操作仍走 `workspaces.openPath`，保留 better-sidebar 在侧边栏打开链接的行为。
 
+## 永久删除会话
+
+> [!CAUTION]
+> 永久删除不可恢复。确认后，会话日志、同目录附件、投影缓存以及工作区记账都会被清理。
+
+- 点击“删除会话”后会显示插件内置确认框；只有点击“确定删除”才会继续。点击取消、遮罩空白处或按 `Esc` 均视为取消。
+- 删除运行中的会话时，插件会先取消任务、等待 Agent 停止并脱离 live session，避免日志被后台重新写回。
+- 删除当前正在查看的会话后，内容区进入与顶部“新建会话”一致的默认状态；删除其他会话不会改变当前内容区。
+- 递归删除仅允许作用于当前 `DSH_HOME/sessions` 下、目录名与会话 ID 完全一致的 JSONL 会话目录。
+- 宿主删除接口只接受同源 JSON 请求，拒绝跨域或不符合格式的调用。
+
 ## 更新日志
+
+### 未发布（`main`）
+
+- **新增**：菜单、Toast、确认框和错误文案支持中英文，并自动跟随宿主 UI 语言。
+- **新增**：会话菜单提供永久删除，包含自定义危险操作确认框、运行中 Agent 停止、硬盘目录验证、投影缓存与工作区记账清理。
+- **行为**：删除当前会话后进入默认新建会话状态；删除非当前会话时保留当前内容区。
+- **安全**：限制递归删除路径，并拒绝跨域及非 JSON 删除请求。
 
 ### v0.2.14（2026-08-18）
 
