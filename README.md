@@ -58,7 +58,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
     <td width="66%" align="center"><strong>工作区右键菜单</strong></td>
   </tr>
   <tr>
-    <td><img src="docs/images/session-menu.png" alt="会话右键菜单" /></td>
+    <td><img src="docs/images/session-menu-zh.png" alt="会话右键菜单（包含永久删除）" /></td>
     <td><img src="docs/images/workspace-menu.png" alt="工作区右键菜单" /></td>
   </tr>
 </table>

@@ -58,31 +58,18 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
     <td width="66%" align="center"><strong>Workspace context menu</strong></td>
   </tr>
   <tr>
-    <td><img src="docs/images/session-menu.png" alt="Session context menu" /></td>
-    <td><img src="docs/images/workspace-menu.png" alt="Workspace context menu" /></td>
+    <td><img src="docs/images/session-menu-en.png" alt="Session context menu with permanent deletion" /></td>
+    <td><img src="docs/images/workspace-menu-en.png" alt="Workspace context menu" /></td>
   </tr>
 </table>
 
 ### Conversation input
 
-<img src="docs/images/conversation-empty-menu.png" alt="Empty conversation input context menu" width="100%" />
+<img src="docs/images/conversation-input-menu-en.png" alt="Conversation input context menu" width="100%" />
 
-### Output content and sidebar editor
+### Output content
 
-<table>
-  <tr>
-    <td width="58%" align="center"><strong>Output content context menu</strong></td>
-    <td width="42%" align="center"><strong>Sidebar editor context menu</strong></td>
-  </tr>
-  <tr>
-    <td><img src="docs/images/conversation-selection-menu.png" alt="Selected conversation text context menu" /></td>
-    <td><img src="docs/images/sidebar-editor-menu.png" alt="Sidebar editor context menu" /></td>
-  </tr>
-</table>
-
-### Settings
-
-<img src="docs/images/settings-menu.png" alt="Selected settings text context menu" width="80%" />
+<img src="docs/images/conversation-selection-menu-en.png" alt="Selected conversation text context menu" width="100%" />
 
 ## Built-in contexts
 
