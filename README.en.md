@@ -86,7 +86,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
 - Resolves targets through accessibility semantics on session rows and uses the public `sessions` and `workspaces` services for ordinary operations. If a target cannot be identified safely, the browser's default menu is left intact.
 - Ordinary actions continue to use public Harness services. Permanent deletion uses a plugin host route because Harness currently exposes archive but no session-deletion RPC.
 - Uninstalling the plugin leaves no patches behind.
-- **Coexists with dsh-better-sidebar** (`v0.2.14+`): better-sidebar wraps the host's `workspaces.openPath` and directs every path to its sidebar editor. To prevent a directory from being treated as a file and failing with `xxx is a directory`, this plugin's Open in File Explorer action calls the host `host.openPath` RPC directly through `POST /api/host.openPath`. Link actions still use `workspaces.openPath`, retaining better-sidebar's link behavior.
+- **Coexists with dsh-better-sidebar** (`v0.2.14+`): better-sidebar wraps the host's `workspaces.openPath` and directs every path to its sidebar editor. To prevent a directory from being treated as a file and failing with `xxx is a directory`, this plugin's Open in File Explorer action calls the host `host.openPath` RPC directly through `POST /api/host.openPath`. URLs never enter the filesystem-path API; the desktop wrapper's external-navigation handler sends them to the system default browser.
 
 ## Permanent session deletion
 
@@ -107,6 +107,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
 - **Added:** Permanent deletion in the session menu, including a custom danger confirmation dialog, live Agent shutdown, on-disk path validation, and projection/workspace cleanup.
 - **Behavior:** Deleting the current session enters the default New Session state; deleting a non-current session preserves the current content area.
 - **Security:** Restricted recursive deletion targets and rejected cross-origin or non-JSON deletion calls.
+- **Fixed:** Open in default browser no longer passes URLs to PowerShell as filesystem paths on Windows.
 
 ### v0.2.14 (2026-08-18)
 

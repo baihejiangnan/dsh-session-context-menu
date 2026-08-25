@@ -103,7 +103,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
   `workspaces.openPath` 把所有路径导向侧边栏编辑器。为避免目录被当文件打开
   （`xxx is a directory`），本插件"在资源管理器中打开"直接调用宿主 RPC
   `host.openPath`（`POST /api/host.openPath`），目录始终交给系统文件管理器；
-  链接类操作仍走 `workspaces.openPath`，保留 better-sidebar 在侧边栏打开链接的行为。
+  URL 不会传入文件路径接口，而由应用封装端的外部导航交给系统默认浏览器。
 
 ## 永久删除会话
 
@@ -124,6 +124,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
 - **新增**：会话菜单提供永久删除，包含自定义危险操作确认框、运行中 Agent 停止、硬盘目录验证、投影缓存与工作区记账清理。
 - **行为**：删除当前会话后进入默认新建会话状态；删除非当前会话时保留当前内容区。
 - **安全**：限制递归删除路径，并拒绝跨域及非 JSON 删除请求。
+- **修复**：Windows 上“使用默认浏览器打开”不再把 URL 当作文件系统路径交给 PowerShell。
 
 ### v0.2.14（2026-08-18）
 
