@@ -103,7 +103,7 @@ dsh plugin --profile web remove @baihejiangnan/dsh-session-context-menu
   `workspaces.openPath` 把所有路径导向侧边栏编辑器。为避免目录被当文件打开
   （`xxx is a directory`），本插件"在资源管理器中打开"直接调用宿主 RPC
   `host.openPath`（`POST /api/host.openPath`），目录始终交给系统文件管理器；
-  URL 不会传入文件路径接口，而由应用封装端的外部导航交给系统默认浏览器。
+  URL 不会传入文件路径接口，而由插件宿主路由交给系统默认浏览器。
 
 ## 永久删除会话
 
